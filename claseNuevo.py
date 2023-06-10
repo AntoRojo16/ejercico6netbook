@@ -5,7 +5,8 @@ class Nuevo(Vehiculo):
     marca="Ford"
 
 
-    def __init__(self,version):
+    def __init__(self,modelo,cant,color,precio,version):
+        super().__init__(modelo,cant,color,precio)
         self.__version=version
 
 
@@ -23,6 +24,11 @@ class Nuevo(Vehiculo):
         importe=super().__precioBase+calculo+calculo2
 
         return importe
+
+
+    def mostrar(self):
+        super().mostrar()
+        print("Version {}".format(self.__version,))
 
 
 

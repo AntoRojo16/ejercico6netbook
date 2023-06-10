@@ -3,8 +3,9 @@ from claseinterfaz import Interfaz
 from claseNuevo import Nuevo
 from claseUsado import Usado
 import os
-
-class Coleccion(Interfaz):
+from zope.interface import implementer
+@implementer(Interfaz)
+class Coleccion:
     __comienzo=None
     __actual=None
     __indice=0
@@ -18,42 +19,86 @@ class Coleccion(Interfaz):
 
 
     def agregarVehiculo(self,vehiculo):
-        if(type(vehiculo)==Usado or type(vehiculo)==Nuevo):
-            nodo=Nodo(vehiculo)
-            if(self.__comienzo==None):
+        try:
 
-                nodo.setSiguiente(self.__comienzo)
-                self.__comienzo=nodo
-                self.__actual=nodo
-                self.__tope+=1
+            if type(vehiculo)==Nuevo or type(vehiculo)==Usado:#podria preguntar si es de clase vehiculo directamente?
+                unNodo=Nodo(vehiculo)
+                if self.__comienzo==None:
+                    unNodo.setSiguiente(self.__comienzo)
+                    self.__comienzo=unNodo
+                    self.__actual=unNodo
+                    self.__tope+=1
+                else:
+                    aux=self.__comienzo
+                    siguiente=self.__comienzo.getSiguiente()
+                    while(siguiente!=None):
+                        aux=siguiente
+                        siguiente=aux.getSiguiente()
+                    unNodo.setSiguiente(siguiente)
+                    aux.setSiguiente(unNodo)
+                    self.__tope+=1
+            else: 
+                raise TypeError
+        except TypeError:
+            print("No es una clase de tipo vehiculo")
+
+    def insertarElemento(self,vehiculo):
+        posicion=int(input("ingrese la posicion en la que desea agregar el vehiculo"))
+        print(self.__tope)
+        print(posicion-1)
+        try:
+            if (posicion>=0) and (posicion<=self.__tope):
+                unNodo=Nodo(vehiculo)
+                if posicion==0:
+                    unNodo.setSiguiente(self.__comienzo)
+                    self.__comienzo=unNodo
+                    self.__tope+=1
+                else:
+                    cont=1
+                    aux=self.__comienzo
+                    siguiente=aux.getSiguiente()
+                    while(siguiente!=None)and(cont!=posicion):
+                        aux=siguiente
+                        siguiente=aux.getSiguiente()
+                        cont+=1
+                    if cont==posicion:
+                        unNodo.setSiguiente(siguiente)
+                        aux.setSiguiente(unNodo)
+                        self.__tope+=1
             else:
-                aux=self.__comienzo
-                while(aux.getSiguiente()!=None):
-                    aux=aux.getSiguiente()
-                nodo.setSiguiente(aux.getSiguiente())
-                aux.setSiguiente(nodo)
-                self.__tope+=1
-                os.system('cls')
-                print ("*** VEHICULO AGREGADO CON EXITO ***")
+                raise IndexError
+        except IndexError:
+            print("Error:  se ingreso un numero menor que 0 o el valor ingresado supera la cantidad de datos almacenados en la coleccion")
 
 
-    def InsertarVehiculo(self,pos,elemento):
-        if(pos>=0 and pos<=self.__tope):
-            nodo=Nodo(elemento)
-            if(pos==0):
-                nodo.setSiguiente(self.__comienzo)
-                self.__comienzo=nodo
-                self.__tope+=1
-            else:
-                num=1
-                aux=self.__comienzo
-                while(num<pos):
-                    aux=aux.getSiguiente()
-                    num+=1
-                nodo.setSiguiente(aux.getSiguiente())
-                aux.setSiguiente(nodo)
-                self.__tope+=1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.__indice==self.__tope:
+            self.__actual=self.__comienzo
+            self.__indice=0
+            raise StopIteration
+        else:
+            self.__indice+=1
+            dato=self.__actual.getDato()
+            self.__actual=self.__actual.getSiguiente()
+            return dato
+
+    def mostrarDatos(self):
+        aux=self.__comienzo
+
+        while(aux!=None):
+            aux.getDato().mostrar()
+            if type(aux)==Nuevo:
+                aux.getDato().getMarca()
+            aux=aux.getSiguiente()
+
+                    
 
 
-    def mostrarElemno(self, posicion):
+        
 
+
+    

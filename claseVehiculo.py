@@ -17,3 +17,6 @@ class Vehiculo:
         pass
 
 
+    def mostrar(self):
+        print("Modelo {}, cantidad de puertas {}, color {}, precion base {}".format(self.__modelo,self.__cantPuertas,self.__color,self.__precioBase))
+

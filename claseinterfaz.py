@@ -2,11 +2,11 @@ from zope.interface import Interface
 
 
 class Interfaz(Interface):
-    def insertarElemento():
+    def insertarElemento(dato):
         pass
 
 
-    def agregarElemento():
+    def agregarElemento(dato):
         pass
 
 

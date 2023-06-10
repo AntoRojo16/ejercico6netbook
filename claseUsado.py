@@ -9,7 +9,8 @@ class Usado(Vehiculo):
 
 
 
-    def __init__(self,marca,patente,año,kilometraje):
+    def __init__(self,modelo,cant,color,precio,marca,patente,año,kilometraje):
+        super().__init__(modelo,cant,color,precio)
         self.__marca=marca
         self.__patente=patente
         self.__año=año
@@ -27,6 +28,11 @@ class Usado(Vehiculo):
 
         impore=super().__precioBase-porcentaje-calculo2
         return impore
+
+
+    def mostrar(self):
+        super().mostrar()
+        print("Marca {}, patente {}, año {}, kilometraje {}".format(self.__marca,self.__patente,self.__año,self.__kilometraje))
 
 
 

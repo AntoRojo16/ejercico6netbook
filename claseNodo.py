@@ -13,4 +13,8 @@ class Nodo:
 
     def getSiguiente(self):
         return self.__siguiente
+
+
+    def getDato(self):
+        return self.__vehiclo
     
