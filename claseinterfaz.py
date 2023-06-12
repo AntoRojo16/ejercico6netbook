@@ -11,6 +11,6 @@ class Interfaz(Interface):
 
 
 
-    def mostrarElemno():
+    def mostrarElemento():
         pass
 

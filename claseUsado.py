@@ -19,20 +19,28 @@ class Usado(Vehiculo):
 
 
     def calcularImporte(self):
-        año=input("ingrese el año actual")
+        año=int(input("ingrese el año actual"))
         calculo=año-int(self.__año)
-        porcentaje=(super().__precioBase*calculo)/100
+        porcentaje=(super().getPrecioBase()*calculo)/100
         calculo2=0
         if self.__kilometraje>200000:
-            calculo2=(super().__precioBase*2)/100
+            calculo2=(super().getPrecioBase()*2)/100
 
-        impore=super().__precioBase-porcentaje-calculo2
+        impore=super().getPrecioBase()-porcentaje-calculo2
         return impore
 
 
     def mostrar(self):
         super().mostrar()
         print("Marca {}, patente {}, año {}, kilometraje {}".format(self.__marca,self.__patente,self.__año,self.__kilometraje))
+
+    def getPatente(self):
+        return self.__patente
+
+    def modificarPrecio(self):
+        precio=input("Ingrese el nuevo precio del vehiculo {}".format(self.__marca))
+        super().modificarP(precio)
+
 
 
 

@@ -88,12 +88,45 @@ class Coleccion:
 
     def mostrarDatos(self):
         aux=self.__comienzo
-
         while(aux!=None):
             aux.getDato().mostrar()
             if type(aux)==Nuevo:
                 aux.getDato().getMarca()
             aux=aux.getSiguiente()
+
+    def mostrarElemento(self):
+        posicion=int(input("ingrese la posicion de el elemento que desea mostrar"))
+        cont=0
+        aux=self.__comienzo
+        #siguiente=aux.getSiguiente()
+        #while cont!=posicion and siguiente!=None:
+        while (cont!=posicion) and (aux!=None):
+            aux=aux.getSiguiente()
+        #    aux=siguiente
+        #    siguiente=siguiente.getSiguiente()
+            cont+=1
+        if posicion==cont:
+            aux.getDato().mostrar()
+
+
+    def modificarPrecioBase(self):
+        patente=input("ingrese la patente del vehiculo usado")
+        band=False
+        aux=self.__comienzo
+        #siguiente=aux.getSiguiente()
+        while(band==False)and(aux!=None):
+            aux.getDato().mostrar()
+            if type(aux.getDato())==Usado:
+                if (aux.getDato().getPatente()==patente):
+                    band=True
+                else:
+                    aux=aux.getSiguiente()
+            else:
+                aux=aux.getSiguiente()
+        if band==True:
+            aux.getDato().modificarPrecio()
+            print("su importe es {}" .format(aux.getDato().calcularImporte()))
+
 
                     
 

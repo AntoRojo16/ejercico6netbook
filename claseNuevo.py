@@ -17,10 +17,10 @@ class Nuevo(Vehiculo):
 
 
     def calcularImporte(self):
-        calculo=(super().__precioBase*10)/100
+        calculo=(super().getPrecioBase()*10)/100
         calculo2=0
         if self.__version=="full":
-            calculo2=(super().__precioBase*2)/100
+            calculo2=(super().getPrecioBase()*2)/100
         importe=super().__precioBase+calculo+calculo2
 
         return importe
